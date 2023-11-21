@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<?php
+    require_once "../includes/head.php";
+?>
     <title>Lunarpunk : Nouveau compte</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Stalinist+One|Oxanium|Barlow">
-    <link rel="stylesheet" href="../css/resetCSS.css">
-    <link rel="stylesheet" href="../css/styleGlobal.css">
     <link rel="stylesheet" href="../css/register.css">
 </head>
 <body>
@@ -18,7 +14,7 @@
 </header>
 
 <main>
-    <form id="signup" class="form">
+    <form action="../controllers/registerControl.php" id="signup" class="form">
         <div class="form-field">
             <label for="surname">Nom : </label>
             <input type="text" name="surname" id="surname"
@@ -65,6 +61,6 @@
     </div>
 </main>
 
-<script src="../javascript/signUp.js"></script>
+<!-- <script src="../javascript/signUp.js"></script> -->
 </body>
 </html>
