@@ -40,7 +40,7 @@ main {
     border-left: 1px solid var(--aqua, #0B9991);
     box-shadow: 0px 5px 0px 0px var(--aqua-shadow, #0B999140);
 }
-#subjectHeader div{
+#subjectHeader form{
     display: flex;
     justify-content: center;
     align-items: center;

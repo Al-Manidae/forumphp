@@ -28,6 +28,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') { //récup données du form
         $_SESSION['errorMdp']=0;
         $_SESSION['errorMail']=0;
         $_SESSION['user']=1;
+        $_SESSION['idUser']=$row['idUser'];
+        $_SESSION['nomUser']=$row['nomUser'];
+        $_SESSION['prenomUser']=$row['prenomUser'];
+        $_SESSION['profilePictureUser']=$row['profilePictureUser'];
+        $_SESSION['dateLogin']= new DateTime;
         header('location: ../view/forum-home.php'); //si tout condistion vrai, envois sur la page forum
     }
 
