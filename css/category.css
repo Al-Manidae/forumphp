@@ -91,7 +91,7 @@ tbody#subjectList tr {
     justify-content: space-between;
     align-items: center;
     align-content: center;
-    cursor: pointer;
+    /* cursor: pointer; */
     position: relative;
     list-style-type: none;
     border-radius: 5px 20px 5px 20px;
@@ -114,6 +114,10 @@ tbody#subjectList tr td.infoAutor {
     width: 25vw;
     padding: 12px 16px 12px 16px;
     font-size: 16px;
+}
+
+a {
+    color: var(--yellow, #FFD000);
 }
 
 /* -------------------------------------------- */

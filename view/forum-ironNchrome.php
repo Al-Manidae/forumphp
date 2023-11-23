@@ -36,7 +36,7 @@
             <tbody id="subjectList">
                 <?php
                 foreach ($rows as $row) {
-                    echo'                    
+                    echo'
                         <tr>
                             <td>'.$row['nameDiscu'].'</td>
                             <td class="infoAutor">Créé le '.$row['timeStartDiscu'].' par '.$row['nomUser'].' '.$row['prenomUser'].'</td>
@@ -53,7 +53,6 @@
     ?>
 </main>
 
-<!-- <script src="../javascript/subjects.js"></script> -->
 <script src="../javascript/headerOnline.js"></script>
 </body>
 </html>

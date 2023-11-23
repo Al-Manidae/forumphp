@@ -13,18 +13,20 @@
     $res = $con->query($req);
     $row = $res->fetch();
     
-    $reqMsg = "SELECT message.idMsg, message.timeMsg, message.contentMsg , message.idDiscu, message.idUser FROM message JOIN utilisateur ON utilisateur.idUser=message.idUser JOIN discution ON discution.idDiscu=message.idDiscu WHERE discution.idDiscu='".$_GET['id']."' ORDER BY message.idMsg DESC";
+    $reqMsg = "SELECT message.idMsg, message.timeMsg, message.contentMsg , message.idDiscu, message.idUser, utilisateur.nomUser, utilisateur.prenomUser FROM message JOIN utilisateur ON utilisateur.idUser=message.idUser JOIN discution ON discution.idDiscu=message.idDiscu WHERE discution.idDiscu='".$_GET['id']."' ORDER BY message.idMsg DESC";
+    $resMsg = $con->query($reqMsg);
+    $rowMsg = $resMsg->fetchAll();
 
     if ($_SERVER['REQUEST_METHOD']==='POST') {
-        $sujet= $_POST['discussionTitle'];
+        $msg= $_POST['myInput'];
         $date = new DateTime() ;
 
-        if ($sujet=='') {
-            header('location: ../view/forum-dailyLife.php');
+        if ($msg=='') {
+            header('refresh : 0');
         }else{
-            $req = $con ->prepare('INSERT INTO discution (nameDiscu, timeStartDiscu, idCat, idUser) VALUES (?,?,?,?)');
-            $req -> execute(array($sujet, $date->format('d/m/Y à H:i:s'), 3, $_SESSION['idUser']) );
-            header('refresh : 0 ; url=../view/forum-dailyLife.php');
+            $req = $con ->prepare('INSERT INTO message (timeMsg, contentMsg, idDiscu , idUser) VALUES (?,?,?,?)');
+            $req -> execute(array($date->format('d/m/Y H:i'), $msg, $_GET['id'], $_SESSION['idUser']) );
+            header('refresh : 0');
         }
     }
 
@@ -52,12 +54,20 @@
         <?php
         echo '<h3>'.$row['nameDiscu'].'</h3>';
         ?>
-        
         <table>
             <tbody id="subjectList">
                 <tr>
                     <td class="infoAutor">[compte supprimé] le 04/11/2074 (10:44)</td>
                     <td>[message supprimé par la moderation]</td>
+                    <?php                    
+                    foreach ($rowMsg as $row) {
+                        echo '
+                            <tr>
+                                <td class="infoAutor">'.$row['nomUser'].' '.$row['prenomUser'].' le '.$row['timeMsg'].'</td>';
+                                echo nl2br('<td>'.$row['contentMsg'].'</td>');
+                        echo '</tr>';
+                    }
+                    ?>
                 </tr>
                 
             </tbody>
@@ -65,10 +75,10 @@
         
         <div id="subjectHeader">
             <p>Votre commentaire</p>
-            <div>
+            <form method="post">
                 <textarea name="myInput" id="myInput" placeholder="Votre commentaire" rows="5" cols="33"></textarea>
-                <button onclick="newElement()" class="yellow" type="button">Commenter</button>
-            </div>
+                <button class="yellow" type="submit">Commenter</button>
+            </form>
         </div>
     </div>
 
@@ -77,7 +87,6 @@
     ?>
 </main>
 
-<script src="../javascript/discussion.js"></script>
 <script src="../javascript/headerOnline.js"></script>
 </body>
 </html>

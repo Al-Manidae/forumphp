@@ -39,7 +39,7 @@ main {
     border-top: 5px solid var(--aqua-shadow, #0B999140);
     border-bottom: 5px solid var(--aqua-shadow, #0B999140);
 }
-#subjectHeader div{
+#subjectHeader form{
     display: flex;
     justify-content: center;
     align-items: center;
