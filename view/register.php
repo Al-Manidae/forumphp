@@ -1,6 +1,6 @@
 <?php
     if (session_status() !== PHP_SESSION_ACTIVE) session_start();
-    require_once "controllers/deco.php";
+    require_once "../controllers/deco.php";
     require_once "../includes/head.php";
     require_once "../controllers/registerControl.php";
 ?>
