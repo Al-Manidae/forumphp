@@ -38,9 +38,8 @@
                 foreach ($rows as $row) {
                     echo'
                     <tr>
-                        <td>'.$row['nameDiscu'].'</td>
-                        <td class="infoAutor">Créé le '.$row['timeStartDiscu'].' par '.$row['nomUser'].' '.$row['prenomUser'].'</td>
-                        <td><a href="discution.php?id='.$row['idDiscu'].'">Link</a></td>
+                        <td><a href="discution.php?id='.$row['idDiscu'].'">'.$row['nameDiscu'].'</a></td>
+                        <td class="infoAutor"><a href="discution.php?id='.$row['idDiscu'].'">Créé le '.$row['timeStartDiscu'].' par '.$row['nomUser'].' '.$row['prenomUser'].'</a></td>
                     </tr>';
                 }
                 ?>

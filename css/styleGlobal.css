@@ -239,6 +239,7 @@ button.yellow{
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+    cursor: pointer;
 }
 
 button.yellow:hover {
@@ -267,6 +268,7 @@ button.blue{
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+    cursor: pointer;
 }
 
 button.blue:hover {
