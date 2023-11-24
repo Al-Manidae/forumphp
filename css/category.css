@@ -87,11 +87,9 @@ tbody#subjectList {
 /* sujets */
 tbody#subjectList tr {
     display: flex;
-    padding: 10px 8px;
     justify-content: space-between;
     align-items: center;
     align-content: center;
-    /* cursor: pointer; */
     position: relative;
     list-style-type: none;
     border-radius: 5px 20px 5px 20px;
@@ -110,14 +108,25 @@ tbody#subjectList tr:hover {
     background: var(--aqua-shadow, #0B999140);
 }
 
-tbody#subjectList tr td.infoAutor {
-    width: 25vw;
-    padding: 12px 16px 12px 16px;
-    font-size: 16px;
+tbody#subjectList tr td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex: 1 0 0;
+    align-self: stretch;
 }
 
-a {
-    color: var(--yellow, #FFD000);
+tbody#subjectList tr td a {    
+    width: 100%;
+    padding: 12px 12px ;
+    text-align: left;
+    color: var(--aqua, #0B9991);
+    text-decoration: none;
+}
+
+tbody#subjectList tr td.infoAutor a {
+    font-size: 16px;
+    text-align: right;
 }
 
 /* -------------------------------------------- */
