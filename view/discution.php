@@ -1,8 +1,10 @@
 <?php
     if (session_status() !== PHP_SESSION_ACTIVE) session_start();
-    // if (!isset($_SESSION["user"])) {
-    //     header('location: ../index.php');
-    // } Fonctionne pas encore
+
+    if (!isset($_SESSION["user"]) || empty($_SESSION["user"])) {
+        header('location: ../index.php');
+    }
+
     require_once "../includes/head.php";
     require_once "../includes/connectBd.php";
     $con = connectdb();
@@ -13,7 +15,7 @@
     $res = $con->query($req);
     $row = $res->fetch();
     
-    $reqMsg = "SELECT message.idMsg, message.timeMsg, message.contentMsg , message.idDiscu, message.idUser, utilisateur.nomUser, utilisateur.prenomUser FROM message JOIN utilisateur ON utilisateur.idUser=message.idUser JOIN discution ON discution.idDiscu=message.idDiscu WHERE discution.idDiscu='".$_GET['id']."' ORDER BY message.idMsg DESC";
+    $reqMsg = "SELECT message.idMsg, message.timeMsg, message.contentMsg , message.idDiscu, message.idUser, utilisateur.nomUser, utilisateur.prenomUser FROM message JOIN utilisateur ON utilisateur.idUser=message.idUser JOIN discution ON discution.idDiscu=message.idDiscu WHERE discution.idDiscu='".$_GET['id']."'";
     $resMsg = $con->query($reqMsg);
     $rowMsg = $resMsg->fetchAll();
 
@@ -25,7 +27,7 @@
             header('refresh : 0');
         }else{
             $req = $con ->prepare('INSERT INTO message (timeMsg, contentMsg, idDiscu , idUser) VALUES (?,?,?,?)');
-            $req -> execute(array($date->format('d/m/Y H:i'), $msg, $_GET['id'], $_SESSION['idUser']) );
+            $req -> execute(array($date->format('d/m/Y (H:i)'), $msg, $_GET['id'], $_SESSION['idUser']) );
             header('refresh : 0');
         }
     }
@@ -40,7 +42,7 @@
 
 <header class="online">
     <div>
-        <a href=""><h1>Lunarpunk</h1></a>
+        <a href="forum-home.php"><h1>Lunarpunk</h1></a>
         <h2>Forum</h2>        
     </div>
     <?php

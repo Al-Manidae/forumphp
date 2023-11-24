@@ -1,8 +1,10 @@
 <?php
     if (session_status() !== PHP_SESSION_ACTIVE) session_start();
-    // if (!isset($_SESSION["user"])) {
-    //     header('location: ../index.php');
-    // } Fonctionne pas encore
+
+    if (!isset($_SESSION["user"]) || empty($_SESSION["user"])) {
+        header('location: ../index.php');
+    }
+
     require_once "../includes/head.php";
 ?>
     <title>Lunarpunk : Acceuil</title>
@@ -13,7 +15,7 @@
 
 <header class="online">
     <div>
-        <a href=""><h1>Lunarpunk</h1></a>
+        <h1>Lunarpunk</h1>
         <h2>Acceuil</h2>        
     </div>
     <?php
