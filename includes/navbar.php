@@ -13,5 +13,5 @@
             <button onclick="location.href='forum-dailyLife.php'" class="blue" type="button">Quotidien</button>
         </li>
     </ul>
-    <button onclick="location.href='../index.php'" class="yellow deconnexion" type="button">Déconnexion <img src="../images/icon-logOut.svg" alt="icone de Déconnexion"></button>
+    <button onclick="location.href='../controllers/deco.php'" class="yellow deconnexion" type="button">Déconnexion <img src="../images/icon-logOut.svg" alt="icone de Déconnexion"></button>
 </nav>

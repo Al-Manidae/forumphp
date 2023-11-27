@@ -16,17 +16,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') { //récup données du form
     $responce = $con->query($pass); //execution de la recherche
     $row = $responce->fetch(); //va cercher le mdp dans la bdd
     date_default_timezone_set('Europe/Paris'); // utc+1 pour l'heure
-    if (!$user) {
-        $_SESSION['errorMail']=1;
-        $_SESSION['errorMdp']=0;
-        header('location: ../view/login.php'); //si tout condistion fausse, reste sur la page login
-    } else if (!password_verify($mdp, $row['mdpUser'])) {
-        $_SESSION['errorMdp']=1;
-        $_SESSION['errorMail']=0;
+    if (!$user || !password_verify($mdp, $row['mdpUser'])) {
+        $_SESSION['errorInfo']=1;
+        $_SESSION['errorActive']=0;
+        header('location: ../view/login.php'); //si condition fausse, reste sur login
+    } elseif (!$user || $row['active']==0) { //ne permet de login que sur un compte activé
+        $_SESSION['errorInfo']=0;
+        $_SESSION['errorActive']=1;
         header('location: ../view/login.php');
     } else {
-        $_SESSION['errorMdp']=0;
-        $_SESSION['errorMail']=0;
+        $_SESSION['errorInfo']=0;
         $_SESSION['user']=1;
         $_SESSION['idUser']=$row['idUser'];
         $_SESSION['nomUser']=$row['nomUser'];

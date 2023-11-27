@@ -77,9 +77,29 @@ if ($_SERVER['REQUEST_METHOD']==='POST') { // récupère toutes les données du 
         $_SESSION['errorMailExist']=0;
         $_SESSION['errorMdpRegister']=0;
         $_SESSION['errorMdpConfirm']=0;
+
         $date=new DateTime(); // définition d'une nouvelle date/heure à l'instant de l'inscription
-        $req= $con-> prepare('INSERT INTO utilisateur (nomUser, prenomUser, mailUser, mdpUser, profilePictureUser, dateRegister) VALUES (?, ?, ?, ?, ?, ?)'); // préparation à l'insertion des données dans la table utilisateur de la BDD
-        $req->execute(array($nom, $prenom, $mail, $mdpHash, $uploadPP, $date-> format('d/m/Y'))); // insertion des valeurs dans la table utilisateur de la BDD ; $date-> format('d/m/Y') format personalisé de la date
+
+        $activation_code= password_hash(bin2hex(random_bytes(16)), PASSWORD_DEFAULT); //crée un code d'activation unique
+        $activation_expiry= date('Y-m-d H:i:s',  time() + (1 * 24  * 60 * 60)) ; //définie la fin de validité du code
+
+        $req= $con-> prepare('INSERT INTO utilisateur (nomUser, prenomUser, mailUser, mdpUser, profilePictureUser, dateRegister, activation_code, activation_expiry) VALUES (?, ?, ?, ?, ?, ?, ?, ?)'); // préparation à l'insertion des données dans la table utilisateur de la BDD
+        $req->execute(array($nom, $prenom, $mail, $mdpHash, $uploadPP, $date-> format('d/m/Y'), $activation_code, $activation_expiry)); // insertion des valeurs dans la table utilisateur de la BDD ; $date-> format('d/m/Y') format personalisé de la date
+
+        $activation_link = APP_URL . "/activate.php?email=$email&activation_code=$activation_code";
+
+        $objet = 'Please activate your account';
+        $message = <<<MESSAGE
+                Hi,
+                Please click the following link to activate your account:
+                $activation_link
+                MESSAGE;
+        // email header
+        $header = "From:" . SENDER_EMAIL_ADDRESS;
+
+        // send the email
+        mail($email, $subject, nl2br($message), $header);
+
         header('location: ../view/login.php'); // renvoie sur le login
     }
 

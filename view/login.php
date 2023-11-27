@@ -1,6 +1,5 @@
 <?php
     if (session_status() !== PHP_SESSION_ACTIVE) session_start();
-    require_once "../controllers/deco.php";
     require_once "../includes/head.php";
     require_once "../controllers/loginControl.php";
 ?>
@@ -21,20 +20,22 @@
             <label for="email">Email:</label>
             <input type="text" name="email" id="email"
             autocomplete="off" placeholder="E-mail">
-            <?php
-            if (isset($_SESSION["errorMail"]) && $_SESSION["errorMail"]==1) {
-                echo '<small>Adresse mail incorrect</small>';
-            }
-            ?>
         </div>
 
         <div class="form-field">
             <label for="password">Mot de passe</label>
             <input type="password" name="password" id="password"
             autocomplete="off" placeholder="Mot de passe">
+        </div>
+        
+        <div class="form-field">
             <?php
-            if (isset($_SESSION["errorMdp"]) && $_SESSION["errorMdp"]==1) {
-                echo '<small>Mot de passe incorrect</small>';
+            if (isset($_SESSION["errorInfo"]) && $_SESSION["errorInfo"]==1) {
+                echo '<small>Adresse mail ou mots de passe incorrect</small>';
+            }elseif (isset($_SESSION["errorActive"]) && $_SESSION["errorActive"]==1) {
+                echo '<small>Ce compte n\'a pas encore été activé.</small>';
+            }else {
+                # pas d'erreur
             }
             ?>
         </div>

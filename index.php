@@ -1,6 +1,4 @@
 <?php
-    require_once "controllers/deco.php";
-
     require_once "includes/head.php";
 ?>
 

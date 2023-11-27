@@ -1,8 +1,9 @@
 <?php
     if (session_status() !== PHP_SESSION_ACTIVE) session_start();
-    require_once "../controllers/deco.php";
     require_once "../includes/head.php";
     require_once "../controllers/registerControl.php";
+    // validation par mail du register
+    // https://www.phptutorial.net/php-tutorial/php-email-verification/
 ?>
     <title>Lunarpunk : Nouveau compte</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Stalinist+One|Oxanium|Barlow">
